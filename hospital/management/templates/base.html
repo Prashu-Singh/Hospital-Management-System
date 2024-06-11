@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital-Management</title>
+    <link rel="stylesheet" href="{% static 'CSS/bootstrap.min.css' %}">
+    
+  {% block style %}
+    
+  {% endblock style %}
+    
+  </head>
+<body>
+      
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand " href="#">Hospital</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link active" href="{% url 'home' %}">Home</a>
+              </li>
+              {% if request.session.uname %}
+
+                {% if request.user.is_superuser %}
+
+                <!-- Doctor Section -->
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Doctor
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'add_doctor' %}">Add Doctor</a></li>
+                    <li><a class="dropdown-item" href="{% url 'drdata' %}">Doctors List</a></li>
+                  </ul>
+                </li>
+
+                <!-- Admit patient section -->
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Admit Patient
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'addadmit' %}">Admit Patient</a></li>
+                    <li><a class="dropdown-item" href="{% url 'admitdata' %}">Patient Details</a></li>
+                  </ul>
+                </li>
+
+                <!-- Contacted by list -->
+
+                <li class="nav-item">
+                  <li><a class="nav-link" href="{% url 'contactlist' %}">Contact by lists</a></li>
+                </li>
+
+                {% endif %}
+
+                <!-- Appoinment Booking Section -->
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Take-Appoinment
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'add_appoinment' %}">Book-Appoinment</a></li>
+                    <li><a class="dropdown-item" href="{% url 'appodata' %}">Appoinmnet Details</a></li>
+                  </ul>
+                </li>
+
+              {% endif %}
+            </ul>
+
+            <!-- Contact us section -->
+
+            <li class="nav-item dropdown">
+              <a class="btn btn-secondary dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                More About
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{% url 'contactus' %}">Contact us</a></li>
+              </ul>
+            </li>
+
+          </ul>
+
+          <!-- login & logout Section -->
+          
+          {% if request.session.uname %}
+            <h5 style="color: white;" class=n"me-5">Welcome &nbsp;{{request.session.uname}}&nbsp;</h5>
+            <a href="{% url 'logoutuser' %}" class="btn btn-danger">Logout</a>
+            {% else %}
+           <a href="{% url 'loginuser' %}" class="btn btn-primary">Login</a>
+          {% endif %}
+          
+        </div>
+      </div>
+    </nav>
+    
+  
+  {% block body %}
+    {% csrf_token %}  
+  {% endblock body %}
+        
+  <script src="{% static 'JS/bootstrap.bundle.min.js' %}"></script>
+  
+</body>
+</html>

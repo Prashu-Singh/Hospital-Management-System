@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load  static %}
+
+{% block style %}
+    <style>
+        body{
+            background-size: 100%;
+            background-image: url({% static 'image/hosp.jpg' %});
+        }
+        h1{
+            margin-top: 20%;
+        }
+    </style>
+{% endblock style %}
+    
+    
+
+{% block body %}
+    <div class="text-center"> 
+        <h1><b>This is hospital management page...</b><hr></h1>
+    </div>
+
+{% endblock body %}
+    

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block style %}
+    <style>
+        html,body{
+            height: 100%;
+            margin: 0;
+        }
+        body{
+            background-size: 100%;
+            background-image:linear-gradient(rgba(243, 236, 236, 0.5),rgba(0,0,0,0.5)),  url({%static 'image/contact.jpg' %});
+        
+        }
+        div{
+            height: auto;
+        }
+        
+    </style>
+{% endblock style %}
+    
+
+{% block body %}
+<div class="container">
+    <div class="row my-4">
+        <div class="col-sm-6 offset-sm-3">
+        
+            <h1 align="center">Contact Us...<hr></h1><br>
+            <div class="d-flex justify-content-center">
+                <form action="" method="POST" class="shadow p-5">
+                    {% csrf_token %}
+                    <table>{{cform}}</table><br>
+                    <input type="submit" value="submit" class="btn-dark">
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+  <style>
+    body{
+      background: #70e1f5;
+      background: -webkit-linear-gradient(to right, #ffd194, #70e1f5); 
+      background: linear-gradient(to right, #ffd194, #70e1f5); 
+    }
+  </style>
+{%endblock style%}
+
+{% block body %}
+    <div class="container">
+        <div class="row my-3">
+          <div class="col-sm-6 offset-sm-3">
+            <h3 class="text-center">Signup</h3>
+            {% if messages %}
+                {% for message in messages %}
+                
+                {% if message.tags == "success" %}
+                <p class="text-success">{{message}}</p>
+                {% else %}
+                <p class="text-danger">{{message}}</p>
+                {% endif %}
+                {% endfor %} 
+              {% endif %}
+            <hr>
+            <form action="" method="POST" class="shadow p-5"> 
+              {% csrf_token %}
+              
+              {% for i in myform %}
+                {{i.label_tag}}&nbsp;{{i}} <small class="text-danger">{{i.errors}}</small><br>
+              {% endfor %}
+                
+              <input type="submit" value="submit" class="btn btn-primary">
+            </form>
+          </div>
+        </div>
+      </div>
+{% endblock body %}
+        
